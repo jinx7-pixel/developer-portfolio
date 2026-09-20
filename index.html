@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Personal portfolio of [Your Name] — Full-Stack Developer crafting modern web experiences." />
+    <meta name="author" content="[Your Name]" />
+    <title>[Your Name] — Portfolio</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233b82f6'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-family='Inter,Arial,sans-serif' font-size='52' font-weight='800' text-anchor='middle' fill='white'%3EY%3C/text%3E%3C/svg%3E" />
+
+    <!-- Tailwind CSS (vendored locally — works offline) -->
+    <script src="css/tailwind.js"></script>
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50:  '#eef4ff',
+                            100: '#dbe7ff',
+                            200: '#b9d2ff',
+                            300: '#8ab5ff',
+                            400: '#5a8eff',
+                            500: '#3b6bff',
+                            600: '#2a4ff5',
+                            700: '#243fdb',
+                            800: '#2236b0',
+                            900: '#23338b',
+                        },
+                    },
+                    boxShadow: {
+                        glow: '0 0 40px -10px rgba(99, 102, 241, 0.5)',
+                        'glow-lg': '0 0 60px -10px rgba(139, 92, 246, 0.6)',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500/40 selection:text-white">
+
+    <!-- ================================ -->
+    <!--            NAVBAR                -->
+    <!-- ================================ -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-2 group">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 font-extrabold text-white text-lg shadow-glow group-hover:scale-110 transition-transform">Y</span>
+                    <span class="font-bold text-lg tracking-tight">
+                        <span class="text-white">[Your</span><span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Name]</span>
+                    </span>
+                </a>
+
+                <!-- Desktop links -->
+                <ul class="hidden md:flex items-center gap-1">
+                    <li><a href="#home"        class="nav-link">Home</a></li>
+                    <li><a href="#about"       class="nav-link">About</a></li>
+                    <li><a href="#skills"      class="nav-link">Skills</a></li>
+                    <li><a href="#projects"    class="nav-link">Projects</a></li>
+                    <li><a href="#education"   class="nav-link">Education</a></li>
+                    <li><a href="#contact"     class="nav-link">Contact</a></li>
+                </ul>
+
+                <!-- CTA + Mobile toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#contact" class="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold hover:shadow-glow hover:scale-105 transition-all duration-300 whitespace-nowrap">
+                        Hire Me
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+
+                    <button id="menu-toggle" type="button" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition" aria-label="Open menu" aria-expanded="false">
+                        <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <ul class="flex flex-col gap-1 p-2 rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-white/10">
+                    <li><a href="#home"        class="mobile-link">Home</a></li>
+                    <li><a href="#about"       class="mobile-link">About</a></li>
+                    <li><a href="#skills"      class="mobile-link">Skills</a></li>
+                    <li><a href="#projects"    class="mobile-link">Projects</a></li>
+                    <li><a href="#education"   class="mobile-link">Education</a></li>
+                    <li><a href="#contact"     class="mobile-link">Contact</a></li>
+                    <li class="pt-2 border-t border-white/10 mt-1">
+                        <a href="#contact" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold">
+                            Hire Me
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ================================ -->
+        <!--              HERO                -->
+        <!-- ================================ -->
+        <section id="home" class="relative min-h-screen flex items-center overflow-hidden pt-20">
+            <!-- Background orbs -->
+            <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+                <div class="absolute top-1/4 -left-32 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl animate-float"></div>
+                <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl animate-float-delay"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-3xl"></div>
+                <!-- Grid pattern -->
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left: text -->
+                    <div class="text-center lg:text-left">
+                        <div data-animate class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-sm text-slate-300 mb-6">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                            </span>
+                            Available for new opportunities
+                        </div>
+
+                        <h1 data-animate class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6">
+                            Hi, I'm <br class="hidden sm:block" />
+                            <span class="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">[Your Name]</span>
+                        </h1>
+
+                        <div data-animate class="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-300 mb-6 h-9">
+                            <span id="typed"></span><span class="text-indigo-400">|</span>
+                        </div>
+
+                        <p data-animate class="text-base sm:text-lg text-slate-400 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                            I craft modern, fast, and accessible web experiences. Passionate about clean code, thoughtful design, and building products people love.
+                        </p>
+
+                        <div data-animate class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                            <a href="#projects" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold shadow-glow hover:shadow-glow-lg hover:scale-105 transition-all duration-300">
+                                View Projects
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </a>
+                            <a href="#contact" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur-sm font-semibold transition-all duration-300">
+                                Get in Touch
+                            </a>
+                        </div>
+
+                        <!-- Socials -->
+                        <div data-animate class="mt-10 flex items-center gap-4 justify-center lg:justify-start">
+                            <span class="text-sm text-slate-500">Follow me:</span>
+                            <div class="flex gap-2">
+                                <a href="https://github.com/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                </a>
+                                <a href="https://linkedin.com/in/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05a3.74 3.74 0 013.37-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43A2.06 2.06 0 117.4 5.37a2.06 2.06 0 01-2.06 2.06zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+                                </a>
+                                <a href="https://twitter.com/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                </a>
+                                <a href="mailto:[your.email@example.com]" class="social-icon" aria-label="Email">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: code card / visual -->
+                    <div data-animate class="relative hidden lg:block">
+                        <div class="relative animate-float">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur-2xl opacity-50"></div>
+                            <div class="relative rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-white/10 p-6 shadow-2xl">
+                                <!-- Window dots -->
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    <span class="ml-2 text-xs text-slate-500 font-mono">~/portfolio</span>
+                                </div>
+                                <pre class="font-mono text-sm leading-relaxed text-slate-300"><code><span class="text-pink-400">const</span> <span class="text-blue-300">developer</span> = {
+  <span class="text-emerald-300">name</span>:    <span class="text-amber-300">"[Your Name]"</span>,
+  <span class="text-emerald-300">role</span>:    <span class="text-amber-300">"Full-Stack Dev"</span>,
+  <span class="text-emerald-300">skills</span>:  [<span class="text-amber-300">"JS"</span>, <span class="text-amber-300">"TS"</span>, <span class="text-amber-300">"React"</span>],
+  <span class="text-emerald-300">loves</span>:   <span class="text-amber-300">"clean UI"</span>,
+  <span class="text-emerald-300">shipIt</span>:  () => <span class="text-amber-300">"🚀"</span>
+};</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Floating badges -->
+                        <div class="absolute -top-6 -right-6 px-4 py-2 rounded-xl bg-slate-900/90 backdrop-blur border border-white/10 shadow-xl animate-float-delay">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                                <span class="text-sm font-medium">3+ years exp</span>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 px-4 py-2 rounded-xl bg-slate-900/90 backdrop-blur border border-white/10 shadow-xl animate-float">
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl">⚡</span>
+                                <span class="text-sm font-medium">Fast delivery</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <a href="#about" class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-slate-500 hover:text-slate-300 transition animate-bounce-slow" aria-label="Scroll to about section">
+                <span class="text-xs uppercase tracking-widest">Scroll</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            </a>
+        </section>
+
+        <!-- ================================ -->
+        <!--             ABOUT                -->
+        <!-- ================================ -->
+        <section id="about" class="py-20 md:py-28 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <p data-animate class="text-sm uppercase tracking-[0.3em] text-indigo-400 font-semibold mb-3">Get to know me</p>
+                    <h2 data-animate class="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+                        About <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Me</span>
+                    </h2>
+                </div>
+
+                <div class="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
+                    <!-- Avatar / visual -->
+                    <div data-animate class="lg:col-span-2 flex justify-center">
+                        <div class="relative">
+                            <div class="absolute -inset-2 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-3xl blur-2xl opacity-40"></div>
+                            <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 overflow-hidden flex items-center justify-center">
+                                <!-- Placeholder avatar SVG -->
+                                <svg class="w-40 h-40 text-slate-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <div class="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur border border-white/10 text-xs font-mono">
+                                    <span class="text-amber-400">/* replace */</span>
+                                </div>
+                            </div>
+                            <!-- Floating tag -->
+                            <div class="absolute -bottom-4 -right-4 px-4 py-2 rounded-xl bg-slate-900 border border-white/10 shadow-xl">
+                                <span class="text-2xl">👋</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text content -->
+                    <div data-animate class="lg:col-span-3 space-y-6">
+                        <h3 class="text-2xl sm:text-3xl font-bold">
+                            A passionate developer building <span class="text-indigo-400">digital experiences</span>
+                        </h3>
+                        <p class="text-slate-400 leading-relaxed text-base sm:text-lg">
+                            I'm a [Your Role] with a focus on building modern, performant web applications. I enjoy turning complex problems into simple, beautiful, and intuitive designs. When I'm not coding, you'll find me exploring new tech, reading, or [your hobby — placeholder].
+                        </p>
+                        <p class="text-slate-400 leading-relaxed text-base sm:text-lg">
+                            My journey started [X years ago — placeholder], and since then I've worked with startups, agencies, and established companies to deliver products that users love. I believe in continuous learning and writing code that future-me won't hate.
+                        </p>
+
+                        <!-- Quick info grid -->
+                        <div class="grid sm:grid-cols-2 gap-3 pt-2">
+                            <div class="info-item">
+                                <span class="info-label">Name</span>
+                                <span class="info-value">[Your Name]</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value">[your.email@example.com]</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">[Your City, Country]</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Availability</span>
+                                <span class="info-value text-emerald-400">Open to work</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3 pt-4">
+                            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:shadow-glow hover:scale-105 transition-all duration-300">
+                                Let's Talk
+                            </a>
+                            <a href="#" download class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 font-semibold transition-all duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                Download CV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-20" data-animate>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="3">0+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="25">0+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="15">0+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="1000">0+</div>
+                        <div class="stat-label">GitHub Commits</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================ -->
+        <!--             SKILLS               -->
+        <!-- ================================ -->
+        <section id="skills" class="py-20 md:py-28 relative bg-slate-900/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <p data-animate class="text-sm uppercase tracking-[0.3em] text-indigo-400 font-semibold mb-3">What I work with</p>
+                    <h2 data-animate class="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+                        My <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Skills</span>
+                    </h2>
+                    <p data-animate class="mt-4 text-slate-400 max-w-2xl mx-auto">
+                        A curated toolbox I use to design, build, and ship products end-to-end.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Frontend -->
+                    <div data-animate class="skill-card">
+                        <div class="skill-icon bg-blue-500/10 text-blue-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="skill-title">Frontend</h3>
+                        <p class="skill-desc">Building responsive, accessible interfaces with modern frameworks.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Next.js</span>
+                            <span class="skill-tag">Tailwind</span>
+                        </div>
+                    </div>
+
+                    <!-- Backend -->
+                    <div data-animate class="skill-card">
+                        <div class="skill-icon bg-emerald-500/10 text-emerald-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
+                        </div>
+                        <h3 class="skill-title">Backend</h3>
+                        <p class="skill-desc">Designing scalable APIs, services, and server-side logic.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Express</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">REST API</span>
+                            <span class="skill-tag">GraphQL</span>
+                        </div>
+                    </div>
+
+                    <!-- Database -->
+                    <div data-animate class="skill-card">
+                        <div class="skill-icon bg-purple-500/10 text-purple-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                        </div>
+                        <h3 class="skill-title">Database</h3>
+                        <p class="skill-desc">Storing, querying, and modeling data efficiently.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">Firebase</span>
+                        </div>
+                    </div>
+
+                    <!-- DevOps -->
+                    <div data-animate class="skill-card">
+                        <div class="skill-icon bg-orange-500/10 text-orange-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <h3 class="skill-title">DevOps & Tools</h3>
+                        <p class="skill-desc">Shipping reliable code with modern tooling and CI/CD.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Vercel</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">CI/CD</span>
+                        </div>
+                    </div>
+
+                    <!-- Design -->
+                    <div data-animate class="skill-card">
+                        <div class="skill-icon bg-pink-500/10 text-pink-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                        </div>
+                        <h3 class="skill-title">Design</h3>
+                        <p class="skill-desc">Crafting clean, user-centered interfaces and visual systems.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">UI/UX</span>
+                            <span class="skill-tag">Wireframing</span>
+                            <span class="skill-tag">Prototyping</span>
+                        </div>
+                    </div>
+
+                    <!-- Soft skills -->
+                    <div data-animate class="skill-card">
+                        <div class="skill-icon bg-cyan-500/10 text-cyan-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        </div>
+                        <h3 class="skill-title">Soft Skills</h3>
+                        <p class="skill-desc">Working well with teams, communicating clearly, and shipping on time.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="skill-tag">Communication</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">Teamwork</span>
+                            <span class="skill-tag">Leadership</span>
+                            <span class="skill-tag">Agile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================ -->
+        <!--            PROJECTS              -->
+        <!-- ================================ -->
+        <section id="projects" class="py-20 md:py-28 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <p data-animate class="text-sm uppercase tracking-[0.3em] text-indigo-400 font-semibold mb-3">Selected work</p>
+                    <h2 data-animate class="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+                        My <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Projects</span>
+                    </h2>
+                    <p data-animate class="mt-4 text-slate-400 max-w-2xl mx-auto">
+                        A few things I've built recently. Each one taught me something new.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Project 1 -->
+                    <article data-animate class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-blue-600 to-indigo-700">
+                            <div class="project-overlay">
+                                <span class="project-category">Web App</span>
+                            </div>
+                            <!-- Placeholder image: SVG icon -->
+                            <div class="project-icon">
+                                <svg class="w-16 h-16 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">E-Commerce Platform</h3>
+                            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                                A full-featured online store with cart, checkout, and admin dashboard. Built for performance and accessibility.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <span class="tech-pill">Next.js</span>
+                                <span class="tech-pill">Stripe</span>
+                                <span class="tech-pill">Prisma</span>
+                                <span class="tech-pill">PostgreSQL</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                    Live Demo
+                                </a>
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article data-animate class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-purple-600 to-pink-700">
+                            <div class="project-overlay">
+                                <span class="project-category">Mobile App</span>
+                            </div>
+                            <div class="project-icon">
+                                <svg class="w-16 h-16 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Task Tracker App</h3>
+                            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                                A productivity app for managing tasks and projects with team collaboration features and real-time sync.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <span class="tech-pill">React Native</span>
+                                <span class="tech-pill">Firebase</span>
+                                <span class="tech-pill">Redux</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                    Live Demo
+                                </a>
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article data-animate class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-emerald-600 to-teal-700">
+                            <div class="project-overlay">
+                                <span class="project-category">SaaS</span>
+                            </div>
+                            <div class="project-icon">
+                                <svg class="w-16 h-16 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Analytics Dashboard</h3>
+                            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                                Real-time analytics dashboard with interactive charts, custom reports, and team workspace features.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <span class="tech-pill">React</span>
+                                <span class="tech-pill">D3.js</span>
+                                <span class="tech-pill">Node.js</span>
+                                <span class="tech-pill">MongoDB</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                    Live Demo
+                                </a>
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4 -->
+                    <article data-animate class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-orange-500 to-red-600">
+                            <div class="project-overlay">
+                                <span class="project-category">API</span>
+                            </div>
+                            <div class="project-icon">
+                                <svg class="w-16 h-16 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">REST API Service</h3>
+                            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                                A production-grade REST API with auth, rate limiting, caching, and full OpenAPI documentation.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <span class="tech-pill">Node.js</span>
+                                <span class="tech-pill">Express</span>
+                                <span class="tech-pill">Redis</span>
+                                <span class="tech-pill">Docker</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                    Docs
+                                </a>
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5 -->
+                    <article data-animate class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-cyan-600 to-blue-700">
+                            <div class="project-overlay">
+                                <span class="project-category">Open Source</span>
+                            </div>
+                            <div class="project-icon">
+                                <svg class="w-16 h-16 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Dev Tools Library</h3>
+                            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                                An open-source utility library with 1k+ GitHub stars. Helpers for forms, validation, and more.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <span class="tech-pill">TypeScript</span>
+                                <span class="tech-pill">Rollup</span>
+                                <span class="tech-pill">Jest</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                    GitHub
+                                </a>
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                    Docs
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 6 -->
+                    <article data-animate class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-yellow-500 to-orange-600">
+                            <div class="project-overlay">
+                                <span class="project-category">Website</span>
+                            </div>
+                            <div class="project-icon">
+                                <svg class="w-16 h-16 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Marketing Website</h3>
+                            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                                A high-converting marketing site with animations, A/B testing, and SEO-optimized content.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <span class="tech-pill">Astro</span>
+                                <span class="tech-pill">Tailwind</span>
+                                <span class="tech-pill">Sanity</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                    Live Demo
+                                </a>
+                                <a href="#" class="project-link">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================ -->
+        <!--            EDUCATION             -->
+        <!-- ================================ -->
+        <section id="education" class="py-20 md:py-28 relative bg-slate-900/30">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <p data-animate class="text-sm uppercase tracking-[0.3em] text-indigo-400 font-semibold mb-3">My journey</p>
+                    <h2 data-animate class="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+                        <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Education</span> & Experience
+                    </h2>
+                </div>
+
+                <div class="relative">
+                    <!-- Vertical line -->
+                    <div class="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-transparent -translate-x-1/2"></div>
+
+                    <!-- Item 1 -->
+                    <div data-animate class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-date">2022 — Present</span>
+                            <h3 class="timeline-title">Senior Frontend Engineer</h3>
+                            <p class="timeline-org">[Company Name] — [City, Country]</p>
+                            <p class="timeline-desc">Leading the design system team, building reusable component libraries, and mentoring junior developers. Shipped [X] major features.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div data-animate class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-date">2020 — 2022</span>
+                            <h3 class="timeline-title">Full-Stack Developer</h3>
+                            <p class="timeline-org">[Company Name] — [City, Country]</p>
+                            <p class="timeline-desc">Built and maintained customer-facing apps using React, Node.js, and PostgreSQL. Improved page load by 40%.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div data-animate class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-date">2018 — 2020</span>
+                            <h3 class="timeline-title">B.Sc. in Computer Science</h3>
+                            <p class="timeline-org">[University Name] — [City, Country]</p>
+                            <p class="timeline-desc">Graduated with [X.X GPA / First Class]. Focused on software engineering, algorithms, and web technologies.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div data-animate class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-date">2016 — 2018</span>
+                            <h3 class="timeline-title">High School Diploma</h3>
+                            <p class="timeline-org">[School Name] — [City, Country]</p>
+                            <p class="timeline-desc">Specialized in [Math/Science track — placeholder]. First taste of programming through a CS elective.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================ -->
+        <!--             CONTACT              -->
+        <!-- ================================ -->
+        <section id="contact" class="py-20 md:py-28 relative">
+            <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+                <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <p data-animate class="text-sm uppercase tracking-[0.3em] text-indigo-400 font-semibold mb-3">Let's build something</p>
+                    <h2 data-animate class="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+                        Get in <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Touch</span>
+                    </h2>
+                    <p data-animate class="mt-4 text-slate-400 max-w-2xl mx-auto">
+                        Have a project in mind or just want to say hi? Drop a message — I usually reply within a day.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-5 gap-8">
+                    <!-- Contact info -->
+                    <div data-animate class="lg:col-span-2 space-y-4">
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-400">Email</p>
+                                <a href="mailto:[your.email@example.com]" class="font-medium hover:text-indigo-400 transition">[your.email@example.com]</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-400">Location</p>
+                                <p class="font-medium">[Your City, Country]</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-400">Response time</p>
+                                <p class="font-medium">Within 24 hours</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <p class="text-sm text-slate-400 mb-3">Find me on:</p>
+                            <div class="flex gap-3">
+                                <a href="https://github.com/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                </a>
+                                <a href="https://linkedin.com/in/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05a3.74 3.74 0 013.37-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43A2.06 2.06 0 117.4 5.37a2.06 2.06 0 01-2.06 2.06zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+                                </a>
+                                <a href="https://twitter.com/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact form -->
+                    <form data-animate class="lg:col-span-3 glass-card p-6 sm:p-8 space-y-5" onsubmit="handleSubmit(event)">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="name" class="form-label">Your Name</label>
+                                <input id="name" name="name" type="text" required placeholder="John Doe" class="form-input" />
+                            </div>
+                            <div>
+                                <label for="email" class="form-label">Your Email</label>
+                                <input id="email" name="email" type="email" required placeholder="john@example.com" class="form-input" />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="form-label">Subject</label>
+                            <input id="subject" name="subject" type="text" required placeholder="Project inquiry" class="form-input" />
+                        </div>
+                        <div>
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..." class="form-input resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold shadow-glow hover:shadow-glow-lg hover:scale-[1.02] transition-all duration-300">
+                            Send Message
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                        <p id="form-status" class="text-sm text-center text-emerald-400 hidden">✓ Thanks! Your message has been received (demo).</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================================ -->
+    <!--             FOOTER               -->
+    <!-- ================================ -->
+    <footer class="border-t border-white/5 bg-slate-950/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div class="flex items-center gap-2 justify-center md:justify-start">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 font-extrabold text-white text-lg">Y</span>
+                    <span class="font-bold text-lg"><span class="text-white">[Your</span><span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Name]</span></span>
+                </div>
+
+                <ul class="flex flex-wrap gap-x-6 gap-y-2 justify-center text-sm text-slate-400">
+                    <li><a href="#about"     class="hover:text-white transition">About</a></li>
+                    <li><a href="#skills"    class="hover:text-white transition">Skills</a></li>
+                    <li><a href="#projects"  class="hover:text-white transition">Projects</a></li>
+                    <li><a href="#education" class="hover:text-white transition">Education</a></li>
+                    <li><a href="#contact"   class="hover:text-white transition">Contact</a></li>
+                </ul>
+
+                <div class="flex gap-2 justify-center md:justify-end">
+                    <a href="https://github.com/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05a3.74 3.74 0 013.37-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43A2.06 2.06 0 117.4 5.37a2.06 2.06 0 01-2.06 2.06zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+                    </a>
+                    <a href="https://twitter.com/[your-handle]" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="mailto:[your.email@example.com]" class="social-icon" aria-label="Email">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/5 text-center text-sm text-slate-500">
+                © <span id="year"></span> [Your Name]. Built with <span class="text-pink-400">♥</span> using HTML, Tailwind &amp; vanilla JS.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button id="back-to-top" aria-label="Back to top" class="hidden fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-glow hover:scale-110 transition-all duration-300 items-center justify-center">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
