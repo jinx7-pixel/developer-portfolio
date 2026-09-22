@@ -211,26 +211,63 @@
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     /* ----------------------------------------------------------------------
-       9) Contact form handler (demo — wire up to your backend later)
+       9) Contact form handler (posts to backend /api/contact)
        ---------------------------------------------------------------------- */
     window.handleSubmit = function (e) {
         e.preventDefault();
+        const form = e.target;
         const status = document.getElementById('form-status');
-        const btn = e.target.querySelector('button[type="submit"]');
+        const btn = form.querySelector('button[type="submit"]');
         if (btn) {
             btn.disabled = true;
             btn.classList.add('opacity-70');
         }
-        // Simulate sending
-        setTimeout(() => {
-            if (status) status.classList.remove('hidden');
-            e.target.reset();
-            if (btn) {
-                btn.disabled = false;
-                btn.classList.remove('opacity-70');
-            }
-            setTimeout(() => status?.classList.add('hidden'), 4000);
-        }, 700);
+
+        const payload = {
+            name: form.elements.name?.value?.trim() ?? '',
+            email: form.elements.email?.value?.trim() ?? '',
+            subject: form.elements.subject?.value?.trim() ?? '',
+            message: form.elements.message?.value?.trim() ?? '',
+        };
+
+        const setStatus = (text, ok) => {
+            if (!status) return;
+            status.textContent = text;
+            status.classList.remove('hidden', 'text-emerald-400', 'text-rose-400');
+            status.classList.add(ok ? 'text-emerald-400' : 'text-rose-400');
+        };
+
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        })
+            .then(async (response) => {
+                let body = {};
+                try { body = await response.json(); } catch (_) { /* ignore */ }
+                if (!response.ok || !body.ok) {
+                    const msg = (body.errors && body.errors.length)
+                        ? body.errors.join(' ')
+                        : (body.error || `Server responded ${response.status}`);
+                    throw new Error(msg);
+                }
+                return body;
+            })
+            .then(() => {
+                form.reset();
+                setStatus('✓ Thanks — your message has been sent.', true);
+            })
+            .catch((err) => {
+                console.error('[contact] failed:', err);
+                setStatus(`✗ ${err.message || 'Could not send message — try again later.'}`, false);
+            })
+            .finally(() => {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-70');
+                }
+                setTimeout(() => status?.classList.add('hidden'), 5000);
+            });
     };
 
     /* ----------------------------------------------------------------------

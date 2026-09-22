@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Local env files (DB credentials etc.)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+# Server stdout/stderr capture (created each time the dev server starts)
+.server*.log
+*.server.*.log
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
